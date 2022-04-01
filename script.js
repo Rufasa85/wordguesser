@@ -6,6 +6,7 @@ var timePara = document.querySelector("#timePara");
 var lossesSpan = document.querySelector("#lossesSpan");
 var winsSpan = document.querySelector("#winsSpan");
 var words = [
+  "avatar",
   "manatee",
   "zebra",
   "lumpsucker",
@@ -32,6 +33,7 @@ var wins = localStorage.getItem("wins") || 0;
 var losses = localStorage.getItem("losses") || 0;
 winsSpan.textContent = wins;
 lossesSpan.textContent = losses;
+var isHard =false;
 //show user "_" for each letter in word
 function startGame() {
   if (isPlaying) {
@@ -119,3 +121,14 @@ document.querySelector("#resetBtn").addEventListener("click", function() {
   winsSpan.textContent = 0;
   lossesSpan.textContent = 0;
 });
+
+
+document.querySelector("#hardMode").addEventListener("click",function(){
+    if(!isHard){
+        isHard=true;
+        document.body.setAttribute("class","hard")
+    } else {
+        isHard = false;
+        document.body.setAttribute("class","")
+    }
+})

@@ -1,11 +1,21 @@
+@font-face{
+    font-family:joedana;
+    src:url("./fonts/joesfont.ttf")
+}
+
 *{
     margin:0;
     padding:0;
     box-sizing: border-box;
 }
 
-body {
+
+body,button {
     /* background: salmon */
+    font-family:"Comic Sans MS",cursive
+}
+.hard, .hard button {
+    font-family: joedana,cursive
 }
 
 header {
