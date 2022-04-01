@@ -3,16 +3,26 @@
 var wordPara = document.querySelector("#wordPara");
 var startBtn = document.querySelector("#start");
 var timePara = document.querySelector("#timePara")
+var lossesSpan = document.querySelector("#lossesSpan")
+var winsSpan = document.querySelector("#winsSpan")
 var words = ["manatee", "zebra", "lumpsucker", "syzygy", "kiwi"];
 var chosenWord;
 var isPlaying = false;
 var userGuessArray = [];
 var timer;
 var timeLeft=10;
+var wins = localStorage.getItem("wins")||0;
+var losses =localStorage.getItem("losses")|| 0;
+winsSpan.textContent = wins;
+lossesSpan.textContent = losses;
 //show user "_" for each letter in word
 function startGame() {
+    if(isPlaying){
+        return
+    }
     isPlaying=true
     userGuessArray=[];
+    timeLeft=10;
   chosenWord = words[Math.floor(Math.random() * words.length)];
   chosenWord = chosenWord.split("");
   console.log("chosenword:", chosenWord);
@@ -25,6 +35,7 @@ function startGame() {
 }
 
 function startTimer() {
+    timePara.textContent=timeLeft
     timer = setInterval(function(){
         console.log(timeLeft);
         timeLeft--;
@@ -32,6 +43,11 @@ function startTimer() {
         if(timeLeft<=0){
             clearInterval(timer);
             console.log("LOST!")
+            wordPara.textContent = `Too slow! the word was: ${chosenWord.join("")}`
+            losses++
+            localStorage.setItem("losses",losses)
+            lossesSpan.textContent = losses;
+            isPlaying=false
         }
     },1000)
 }
@@ -69,6 +85,10 @@ document.addEventListener("keyup", function(event) {
       wordPara.textContent = userGuessArray.join(" ");
       if (checkWin()) {
         console.log("WINNER!");
+        wordPara.textContent = `WINNER! the word was: ${chosenWord.join("")}`
+        wins++
+        localStorage.setItem("wins",wins)
+        winsSpan.textContent = wins;
       }
     }
   });
