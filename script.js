@@ -92,3 +92,13 @@ document.addEventListener("keyup", function(event) {
       }
     }
   });
+
+  //reset scores
+  document.querySelector("#resetBtn").addEventListener("click",function(){
+      wins=0;
+      losses=0;
+      localStorage.setItem("wins",0)
+      localStorage.setItem("losses",0)
+      winsSpan.textContent=0;
+      lossesSpan.textContent=0;
+  })
